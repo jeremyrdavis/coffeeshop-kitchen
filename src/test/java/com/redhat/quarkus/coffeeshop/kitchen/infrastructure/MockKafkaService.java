@@ -14,21 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MockKafkaService extends KafkaService{
 
     @Override
-    public void updateOrder(Order order) {
+    public void orderUp(Order order) {
 
-        logger.info("mock: " + order.toString());
-        switch (order.getMenuItem()) {
-            case PANINI:
-                assertEquals(OrderStatus.IN_PROGRESS, order.getStatus());
-                break;
-            case COOKIE:
-                assertEquals(OrderStatus.READY, order.getStatus());
-                break;
-            case MUFFIN:
-                assertEquals(OrderStatus.READY, order.getStatus());
-                break;
-            default:
-                assertTrue(false);
-        }
+        logger.info("MockKafkaService received: " + order.toString());
+        assertEquals(OrderStatus.READY, order.getStatus());
     }
 }

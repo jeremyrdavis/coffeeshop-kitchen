@@ -10,7 +10,7 @@ public class KafkaService {
 
     static final Logger logger = Logger.getLogger(KafkaService.class.getName());
 
-    public void updateOrder(Order order) {
+    public void orderUp(Order order) {
 
         logger.info(order.toString());
     }
