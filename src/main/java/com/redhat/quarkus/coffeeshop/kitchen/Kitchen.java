@@ -7,6 +7,7 @@ import com.redhat.quarkus.coffeeshop.kitchen.infrastructure.KafkaService;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.time.Instant;
 import java.util.logging.Logger;
 
 @ApplicationScoped
@@ -20,7 +21,8 @@ public class Kitchen {
     @Transactional
     public void orderIn(Order order) {
 
-        LOGGER.info(order.toString());
+        LOGGER.info("Received order: " + order.toString());
+        LOGGER.info("Sending order at " + Instant.now().toString() + " " + order.toString());
 
         switch (order.getMenuItem()) {
             case  COOKIE:
