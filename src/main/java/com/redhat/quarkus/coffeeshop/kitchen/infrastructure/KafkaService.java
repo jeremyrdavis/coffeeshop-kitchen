@@ -1,7 +1,7 @@
 package com.redhat.quarkus.coffeeshop.kitchen.infrastructure;
 
 import com.redhat.quarkus.coffeeshop.kitchen.Kitchen;
-import com.redhat.quarkus.coffeeshop.kitchen.domain.Order;
+import com.redhat.quarkus.coffeeshop.kitchen.domain.KitchenOrder;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
 
@@ -19,9 +19,9 @@ public class KafkaService {
 
     @Incoming("kitchen-in")
     @Outgoing("kitchen-out")
-    public void orderIn(Order order) {
-        logger.info("orderIn:" + order.toString());
-        Order completedOrder = kitchen.orderIn(order);
-        kitchen.orderIn(order);
+    public void orderIn(KitchenOrder kitchenOrder) {
+        logger.info("orderIn:" + kitchenOrder.toString());
+        KitchenOrder completedKitchenOrder = kitchen.orderIn(kitchenOrder);
+        kitchen.orderIn(kitchenOrder);
     }
 }

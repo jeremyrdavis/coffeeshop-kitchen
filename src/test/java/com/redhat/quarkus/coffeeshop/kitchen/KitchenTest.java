@@ -1,7 +1,7 @@
 package com.redhat.quarkus.coffeeshop.kitchen;
 
+import com.redhat.quarkus.coffeeshop.kitchen.domain.KitchenOrder;
 import com.redhat.quarkus.coffeeshop.kitchen.domain.MenuItem;
-import com.redhat.quarkus.coffeeshop.kitchen.domain.Order;
 import com.redhat.quarkus.coffeeshop.kitchen.domain.OrderStatus;
 import io.quarkus.test.junit.QuarkusTest;
 import org.awaitility.Duration;
@@ -26,12 +26,12 @@ public class KitchenTest {
 
         logger.info("Test that a Cookie is ready instantly");
 
-        Order order = new Order();
-        order.setMenuItem(MenuItem.COOKIE);
-        order.setName("Jeremy");
-        order.setOrderNumber("1234567");
+        KitchenOrder kitchenOrder = new KitchenOrder();
+        kitchenOrder.setMenuItem(MenuItem.COOKIE);
+        kitchenOrder.setName("Jeremy");
+        kitchenOrder.setOrderNumber("1234567");
 
-        kitchen.orderIn(order);
+        kitchen.orderIn(kitchenOrder);
         await()
                 .atLeast(Duration.TWO_SECONDS)
                 .atMost(Duration.FIVE_SECONDS);
@@ -42,15 +42,15 @@ public class KitchenTest {
 
         logger.info("Test that a Panini takes 5 seconds");
 
-        Order order = new Order();
-        order.setMenuItem(MenuItem.PANINI);
-        order.setName("Jeremy");
-        order.setOrderNumber("1234567");
+        KitchenOrder kitchenOrder = new KitchenOrder();
+        kitchenOrder.setMenuItem(MenuItem.PANINI);
+        kitchenOrder.setName("Jeremy");
+        kitchenOrder.setOrderNumber("1234567");
 
-        Order updatedOrder = kitchen.orderIn(order);
+        KitchenOrder updatedKitchenOrder = kitchen.orderIn(kitchenOrder);
 
         await().atLeast(Duration.TEN_SECONDS);
 
-        assertEquals(OrderStatus.READY, updatedOrder.getStatus());
+        assertEquals(OrderStatus.READY, updatedKitchenOrder.getStatus());
     }
 }

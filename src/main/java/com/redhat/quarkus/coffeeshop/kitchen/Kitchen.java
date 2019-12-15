@@ -1,6 +1,6 @@
 package com.redhat.quarkus.coffeeshop.kitchen;
 
-import com.redhat.quarkus.coffeeshop.kitchen.domain.Order;
+import com.redhat.quarkus.coffeeshop.kitchen.domain.KitchenOrder;
 import com.redhat.quarkus.coffeeshop.kitchen.domain.OrderStatus;
 import com.redhat.quarkus.coffeeshop.kitchen.infrastructure.KafkaService;
 
@@ -19,29 +19,29 @@ public class Kitchen {
     KafkaService kafkaService;
 
     @Transactional
-    public Order orderIn(Order order) {
+    public KitchenOrder orderIn(KitchenOrder kitchenOrder) {
 
-        LOGGER.info("Received order: " + order.toString());
-        LOGGER.info("Sending order at " + Instant.now().toString() + " " + order.toString());
+        LOGGER.info("Received order: " + kitchenOrder.toString());
+        LOGGER.info("Sending order at " + Instant.now().toString() + " " + kitchenOrder.toString());
 
-        switch (order.getMenuItem()) {
+        switch (kitchenOrder.getMenuItem()) {
             case  COOKIE:
                 prepare(2);
-                order.setStatus(OrderStatus.READY);
+                kitchenOrder.setStatus(OrderStatus.READY);
                 break;
             case MUFFIN:
                 prepare(3);
-                order.setStatus(OrderStatus.READY);
+                kitchenOrder.setStatus(OrderStatus.READY);
                 break;
             case PANINI:
                 prepare(10);
-                order.setStatus(OrderStatus.READY);
+                kitchenOrder.setStatus(OrderStatus.READY);
                 break;
             default:
-                order.setStatus(OrderStatus.READY);
+                kitchenOrder.setStatus(OrderStatus.READY);
         }
 
-        return order;
+        return kitchenOrder;
     }
 
     private void prepare(int seconds) {

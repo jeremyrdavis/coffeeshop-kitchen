@@ -1,7 +1,7 @@
 package com.redhat.quarkus.coffeeshop.kitchen.infrastructure;
 
 import com.redhat.quarkus.coffeeshop.kitchen.Kitchen;
-import com.redhat.quarkus.coffeeshop.kitchen.domain.Order;
+import com.redhat.quarkus.coffeeshop.kitchen.domain.KitchenOrder;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -29,9 +29,9 @@ public class RESTResource {
 
     @POST
     @Path("/orders")
-    public CompletionStage<Response> orderIn(Order order) {
+    public CompletionStage<Response> orderIn(KitchenOrder kitchenOrder) {
         return CompletableFuture.supplyAsync(() -> {
-            kitchen.orderIn(order);
+            kitchen.orderIn(kitchenOrder);
             return Response.accepted().build();
         }, executor);
     }

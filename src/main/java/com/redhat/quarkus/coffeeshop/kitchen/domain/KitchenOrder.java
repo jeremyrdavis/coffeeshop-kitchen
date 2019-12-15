@@ -1,6 +1,6 @@
 package com.redhat.quarkus.coffeeshop.kitchen.domain;
 
-public class Order {
+public class KitchenOrder {
 
     String orderNumber;
 

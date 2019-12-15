@@ -1,6 +1,6 @@
 package com.redhat.quarkus.coffeeshop.kitchen.infrastructure;
 
-import com.redhat.quarkus.coffeeshop.kitchen.domain.Order;
+import com.redhat.quarkus.coffeeshop.kitchen.domain.KitchenOrder;
 import com.redhat.quarkus.coffeeshop.kitchen.domain.OrderStatus;
 import io.quarkus.test.Mock;
 
@@ -14,10 +14,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MockKafkaService extends KafkaService{
 
     @Override
-    public void orderIn(Order order) {
+    public void orderIn(KitchenOrder kitchenOrder) {
 
-        logger.info("MockKafkaService received at " + Instant.now().toString() + " " + order.toString());
-        assertEquals(OrderStatus.READY, order.getStatus());
-        order.setStatus(OrderStatus.READY);
+        logger.info("MockKafkaService received at " + Instant.now().toString() + " " + kitchenOrder.toString());
+        assertEquals(OrderStatus.READY, kitchenOrder.getStatus());
+        kitchenOrder.setStatus(OrderStatus.READY);
     }
 }
