@@ -1,5 +1,6 @@
-package com.redhat.quarkus.coffeeshop.kitchen;
+package com.redhat.quarkus.coffeeshop.kitchen.infrastructure;
 
+import com.redhat.quarkus.coffeeshop.kitchen.Kitchen;
 import com.redhat.quarkus.coffeeshop.kitchen.domain.Order;
 
 import javax.inject.Inject;
@@ -14,7 +15,7 @@ import java.util.concurrent.Executors;
 @Path("/kitchen")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class KitchenResource {
+public class RESTResource {
 
     @Inject
     Kitchen kitchen;

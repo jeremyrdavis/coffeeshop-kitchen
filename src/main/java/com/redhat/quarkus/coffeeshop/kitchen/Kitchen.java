@@ -19,7 +19,7 @@ public class Kitchen {
     KafkaService kafkaService;
 
     @Transactional
-    public void orderIn(Order order) {
+    public Order orderIn(Order order) {
 
         LOGGER.info("Received order: " + order.toString());
         LOGGER.info("Sending order at " + Instant.now().toString() + " " + order.toString());
@@ -38,9 +38,10 @@ public class Kitchen {
                 order.setStatus(OrderStatus.READY);
                 break;
             default:
-                order.setStatus(OrderStatus.IN_PROGRESS);
+                order.setStatus(OrderStatus.READY);
         }
-        kafkaService.orderUp(order);
+
+        return order;
     }
 
     private void prepare(int seconds) {

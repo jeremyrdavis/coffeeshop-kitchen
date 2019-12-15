@@ -2,6 +2,7 @@ package com.redhat.quarkus.coffeeshop.kitchen;
 
 import com.redhat.quarkus.coffeeshop.kitchen.domain.MenuItem;
 import com.redhat.quarkus.coffeeshop.kitchen.domain.Order;
+import com.redhat.quarkus.coffeeshop.kitchen.domain.OrderStatus;
 import io.quarkus.test.junit.QuarkusTest;
 import org.awaitility.Duration;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import javax.inject.Inject;
 import java.util.logging.Logger;
 
 import static org.awaitility.Awaitility.await;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @QuarkusTest
 public class KitchenTest {
@@ -45,9 +47,10 @@ public class KitchenTest {
         order.setName("Jeremy");
         order.setOrderNumber("1234567");
 
-        kitchen.orderIn(order);
-        await()
-                .atLeast(Duration.TEN_SECONDS)
-                .atMost(Duration.ONE_MINUTE);
+        Order updatedOrder = kitchen.orderIn(order);
+
+        await().atLeast(Duration.TEN_SECONDS);
+
+        assertEquals(OrderStatus.READY, updatedOrder.getStatus());
     }
 }

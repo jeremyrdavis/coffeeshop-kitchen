@@ -14,9 +14,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MockKafkaService extends KafkaService{
 
     @Override
-    public void orderUp(Order order) {
+    public void orderIn(Order order) {
 
         logger.info("MockKafkaService received at " + Instant.now().toString() + " " + order.toString());
         assertEquals(OrderStatus.READY, order.getStatus());
+        order.setStatus(OrderStatus.READY);
     }
 }
